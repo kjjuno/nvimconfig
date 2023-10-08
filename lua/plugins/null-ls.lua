@@ -8,17 +8,20 @@ return {
 
         null_ls.setup({
             sources = {
+                code_actions.shellcheck,
+                code_actions.cspell,
+                diagnostics.cspell,
                 diagnostics.eslint,
                 diagnostics.flake8,
+                diagnostics.shellcheck,
                 diagnostics.vale,
                 diagnostics.yamllint,
-                diagnostics.shellcheck,
                 formatting.black,
+                formatting.yamlfmt,
                 formatting.csharpier,
                 formatting.prettier,
-                formatting.stylua,
                 formatting.shellharden,
-                code_actions.shellcheck,
+                formatting.stylua,
             }
         })
     end

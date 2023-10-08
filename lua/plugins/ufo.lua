@@ -1,6 +1,6 @@
 return {
     "kevinhwang91/nvim-ufo",
-    enabled = true,
+    enabled = false,
     dependencies = { "kevinhwang91/promise-async" },
     config = function()
         vim.o.foldcolumn = "1" -- '0' is not bad

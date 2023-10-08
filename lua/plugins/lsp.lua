@@ -60,9 +60,21 @@ return {
             -- Replace the language servers listed here
             -- with the ones you want to install
             ensure_installed = {
-                'tsserver',
+                'azure_pipelines_ls',
+                'bashls',
+                'clangd',
+                'cssls',
+                'dockerls',
                 'eslint',
+                'html',
+                'jsonls',
+                'lua_ls',
+                'marksman',
                 'omnisharp',
+                'powershell_es',
+                'tsserver',
+                'vale_ls',
+                'yamlls',
             },
             handlers = {
                 lsp.default_setup,
