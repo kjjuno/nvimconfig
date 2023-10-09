@@ -17,7 +17,7 @@ require("lazy").setup({
   },
   defaults = {},
   install = {},
-  checker = { enabled = true },
+  checker = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {},
