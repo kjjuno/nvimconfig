@@ -12,11 +12,4 @@ return {
             { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
     },
-    {
-        "ggandor/leap.nvim",
-        enabled = false,
-        config = function()
-            require('leap').add_default_mappings()
-        end
-    }
 }
