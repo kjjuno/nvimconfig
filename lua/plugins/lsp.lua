@@ -1,15 +1,5 @@
 return {
   {
-    'hrsh7th/cmp-nvim-lua',
-    config = function ()
-      require('cmp').setup {
-        sources = {
-          { name = 'nvim_lua' },
-        }
-      }
-    end
-  },
-  {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     dependencies = {
@@ -36,6 +26,12 @@ return {
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       cmp.setup({
+        sources = {
+          { name = 'nvim_lua' },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+        },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -93,17 +89,7 @@ return {
         },
       })
 
-      lsp.setup({
-        sumneko_lua = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' },
-              },
-            },
-          },
-        },
-      })
+      lsp.setup();
     end,
   },
 }
