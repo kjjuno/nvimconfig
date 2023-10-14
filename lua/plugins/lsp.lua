@@ -16,6 +16,7 @@ return {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'L3MON4D3/LuaSnip' },
     },
+    priority = 500,
     config = function()
       local lsp = require('lsp-zero')
 
@@ -63,7 +64,12 @@ return {
         end)
       end)
 
-      require('mason').setup({})
+      require('mason').setup({
+        ensure_installed = {
+          'js-debug-adapter',
+          'netcoredbg',
+        }
+      })
       require('mason-lspconfig').setup({
         -- Replace the language servers listed here
         -- with the ones you want to install
@@ -90,6 +96,57 @@ return {
       })
 
       lsp.setup();
+
+      require('lspconfig').tsserver.setup({
+        on_attach = function(client, bufnr)
+          local opts = { buffer = bufnr, remap = false }
+
+          vim.keymap.set("n", "<leader>co",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.organizeImports.ts" },
+                  diagnostics = {},
+                },
+              })
+            end, opts)
+        end,
+        keys = {
+          {
+            "<leader>co",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.organizeImports.ts" },
+                  diagnostics = {},
+                },
+              })
+            end,
+            desc = "Organize Imports",
+          },
+        },
+        settings = {
+          typescript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+          },
+          javascript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+          },
+          completions = {
+            completeFunctionCalls = true,
+          },
+        },
+      })
     end,
   },
 }
