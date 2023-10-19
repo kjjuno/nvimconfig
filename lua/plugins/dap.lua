@@ -155,6 +155,7 @@ return {
       end
     end
 
+    -- C#
     dap.adapters.coreclr = {
       type = "executable",
       command = "/usr/local/netcoredbg",
