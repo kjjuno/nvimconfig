@@ -12,7 +12,6 @@ return {
     null_ls.setup({
       sources = {
         code_actions.shellcheck,
-        diagnostics.eslint,
         diagnostics.flake8,
         diagnostics.shellcheck,
         diagnostics.vale,
@@ -24,6 +23,15 @@ return {
         formatting.shellharden,
         formatting.stylua,
       },
+    })
+
+    local fmtId = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      group = fmtId,
+      pattern = { "*.ts", "*.js", "*.lua" },
+      callback = function()
+        vim.lsp.buf.format()
+      end,
     })
   end,
 }
