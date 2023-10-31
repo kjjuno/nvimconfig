@@ -15,7 +15,7 @@ return {
         diagnostics.flake8,
         diagnostics.shellcheck,
         diagnostics.vale,
-        diagnostics.yamllint,
+        -- diagnostics.yamllint,
         formatting.black,
         formatting.yamlfmt,
         formatting.csharpier,
