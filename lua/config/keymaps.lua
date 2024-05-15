@@ -14,6 +14,7 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+map("n", "<leader>oc", "<cmd>e ~/.config/nvim/init.lua<CR>", { desc = "Open config" })
 map("n", "<leader>gg", function()
   Util.terminal.open({ "lazygit" }, { cwd = Util.root.get(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit (root dir)" })
@@ -41,3 +42,6 @@ map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 map("i", "<C-j><C-k>", "<esc>", { desc = "which_key_ignore" })
+
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })

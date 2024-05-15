@@ -1,11 +1,12 @@
 return {
   {
     "VonHeikemen/lsp-zero.nvim",
+    enabled = true,
     branch = "v3.x",
     dependencies = {
       { "tpope/vim-sleuth" },
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-      {"folke/neodev.nvim"},
+      { "folke/neodev.nvim" },
 
       --- Uncomment these if you want to manage LSP servers from neovim
       { "williamboman/mason.nvim" },
@@ -30,11 +31,17 @@ return {
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       cmp.setup({
-        sources = {
+        sources = cmp.config.sources({
           { name = "nvim_lua" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+        }, {
           { name = "buffer" },
+        }),
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
         },
         window = {
           completion = cmp.config.window.bordered(),
@@ -122,8 +129,19 @@ return {
 
       lsp.setup()
 
+      require("lspconfig").lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
+      })
+
       require("lspconfig").tsserver.setup({
         on_attach = function(client, bufnr)
+          -- client.server_capabilities.documentFormattingProvider = false
           local opts = { buffer = bufnr, remap = false }
 
           vim.keymap.set("n", "<leader>co", function()
@@ -171,6 +189,12 @@ return {
           },
         },
       })
+
+      -- require("lspconfig").eslint.setup({
+      --   on_attach = function(client, bufnr)
+      --     client.server_capabilities.documentFormattingProvider = false
+      --   end,
+      -- })
     end,
   },
 }

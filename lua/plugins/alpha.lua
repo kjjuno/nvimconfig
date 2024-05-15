@@ -1,5 +1,6 @@
 return {
   "goolord/alpha-nvim",
+  enabled=true,
   event = "VimEnter",
   opts = function()
     -- text generator: https://patorjk.com/software/taag/#p=display&f=Slant&t=kjjuno%0Aneovim

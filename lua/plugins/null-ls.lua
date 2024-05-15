@@ -1,5 +1,6 @@
 return {
   "jose-elias-alvarez/null-ls.nvim",
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
@@ -15,10 +16,9 @@ return {
         diagnostics.flake8,
         diagnostics.shellcheck,
         diagnostics.vale,
-        -- diagnostics.yamllint,
         formatting.black,
         formatting.yamlfmt,
-        formatting.csharpier,
+        -- formatting.csharpier,
         formatting.prettier,
         formatting.shellharden,
         formatting.stylua,
@@ -26,9 +26,9 @@ return {
     })
 
     local fmtId = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
       group = fmtId,
-      pattern = { "*.ts", "*.js", "*.lua" },
+      pattern = { "*.ts", "*.js", "*.lua", "*.cs" },
       callback = function()
         vim.lsp.buf.format()
       end,

@@ -1,6 +1,7 @@
 return {
   {
     "echasnovski/mini.comment",
+    enabled = true,
     event = "VeryLazy",
     dependencies = {
       {
